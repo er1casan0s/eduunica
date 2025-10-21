@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Eduúnica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== VARIÁVEIS PARA ALTO CONTRASTE ===== */
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --text-color: #333333;
+            --background-color: #ffffff;
+            --contrast-ratio: 4.5; /* WCAG AA */
+        }
+
+        /* ===== ESTILOS GERAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== CABEÇALHO ===== */
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #e0e0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #ffffff;
+        }
+
+        .slogan {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-top: 5px;
+            color: #e0e0ff;
+        }
+
+        /* ===== NAVEGAÇÃO ===== */
+        nav {
+            background-color: #ffffff;
+            border-radius: 30px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li a i {
+            margin-right: 8px;
+        }
+
+        .nav-links li a:hover {
+            background-color: #f0f0ff;
+            color: #2575fc;
+        }
+
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        .faq-section {
+            margin: 40px 0;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-header h2 {
+            color: #6a11cb;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .faq-header h2 i {
+            margin-right: 15px;
+        }
+
+        .faq-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding-left: 50px;
+        }
+
+        .search-box:focus {
+            border-color: #6a11cb;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6a11cb;
+            font-size: 1.2rem;
+        }
+
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #6a11cb;
+            color: #6a11cb;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .category-btn i {
+            margin-right: 8px;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: #6a11cb;
+            color: white;
+        }
+
+        .faq-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            border-color: #6a11cb;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.1);
+        }
+
+        .faq-question {
+            background: #f9f9ff;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f0f0ff;
+        }
+
+        .faq-question h3 {
+            color: #6a11cb;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-question h3 i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .faq-toggle {
+            color: #6a11cb;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .contact-support {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .contact-support h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-support h3 i {
+            margin-right: 10px;
+        }
+
+        .contact-support p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .support-btn {
+            background: white;
+            color: #6a11cb;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .support-btn i {
+            margin-right: 10px;
+        }
+
+        .support-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== RODAPÉ ===== */
+        footer {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        footer .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        footer .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        footer .footer-column h3::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background-color: white;
+            margin-top: 10px;
+        }
+
+        footer .footer-column p {
+            color: #e0e0ff;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        footer .footer-column ul {
+            list-style: none;
+        }
+
+        footer .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        footer .footer-column ul li a {
+            color: #e0e0ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        footer .footer-column ul li a i,
+        footer .contact-info li i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        footer .footer-column ul li a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        footer .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: #e0e0ff;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+            }
+
+            .faq-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .faq-container {
+                padding: 25px;
+            }
+
+            .faq-question h3 {
+                font-size: 1.1rem;
+            }
+
+            .contact-support {
+                padding: 30px 20px;
+            }
+
+            footer .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            footer .footer-column h3::after {
+                margin: 10px auto 0;
+            }
+        }
+        /* Botão Voltar ao Topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color, #4a90e2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--primary-dark, #357abd);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:focus {
+    outline: 3px solid var(--focus-color, #ffd700);
+    outline-offset: 2px;
+}
+
+/* Modo alto contraste */
+.high-contrast .back-to-top {
+    background: #000;
+    border: 2px solid #fff;
+}
+
+.high-contrast .back-to-top:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Reduzir movimento */
+.reduce-motion .back-to-top {
+    transition: none;
+}
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        
+                <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="logo"><i class="fas fa-brain"></i> EduÚnica</h1>
+                    <p class="slogan">Porque cada mente merece uma educação sob medida</p>
+                </div>
+            </div>
+            </div>
+            
+            <!-- Navegação -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="login.html"><i class="fas fa-home"></i> Início</a></li>
+                    <!--<li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>-->
+                    <!--<li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>-->
+                    <li><a href="FAQ.html" class="active"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    <li><a href="pp.html"><i class="fas fa-shield-alt"></i> Política de Privacidade</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <section class="faq-section">
+            <div class="faq-header">
+                <h2><i class="fas fa-question-circle"></i> Perguntas Frequentes</h2>
+                <p>Encontre respostas para as dúvidas mais comuns sobre a Eduúnica</p>
+            </div>
+
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-box" placeholder="Buscar nas perguntas frequentes...">
+            </div>
+
+            <div class="faq-categories">
+                <button class="category-btn active" data-category="all">
+                    <i class="fas fa-th"></i> Todas as Categorias
+                </button>
+                <button class="category-btn" data-category="conta">
+                    <i class="fas fa-user"></i> Conta e Perfil
+                </button>
+                <button class="category-btn" data-category="jogos">
+                    <i class="fas fa-gamepad"></i> Jogos e Atividades
+                </button>
+                <button class="category-btn" data-category="tecnico">
+                    <i class="fas fa-cog"></i> Suporte Técnico
+                </button>
+                <button class="category-btn" data-category="privacidade">
+                    <i class="fas fa-shield-alt"></i> Privacidade e Segurança
+                </button>
+            </div>
+
+            <div class="faq-container">
+                <!-- Conta e Perfil -->
+                <div class="faq-item" data-category="conta">
+                    <div class="faq-question">
+                        <h3><i class="fas fa-user-plus"></i> Como criar uma conta na Eduúnica?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para criar uma conta na Eduúnica, siga estes passos:</p>
+                        <ul>
+                            <li>Clique no botão "Cadastrar" no canto superior direito da página inicial</li>
+                            <li>Preencha o formulário com seus dados pessoais (nome, e-mail, data de nascimento)</li>
+                            <li>Crie uma senha segura</li>
+                            <li>Confirme seu e-mail através do link que enviaremos</li>
+                            <li>Complete seu perfil educacional para personalizarmos sua experiência</li>
+                        </ul>
+                        <p>O processo é totalmente gratuito e leva apenas alguns minutos!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="conta">
+                    <div class="faq-question">
+                        <h3><i class="fas fa-lock"></i> Esqueci minha senha, o que fazer?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Se você esqueceu sua senha, não se preocupe! Siga estes passos para redefini-la:</p>
+                        <ol>
+                            <li>Clique em "Entrar" na página inicial</li>
+                            <li>Selecione a opção "Esqueci minha senha"</li>
+                            <li>Informe o e-mail associado à sua conta</li>
+                            <li>Verifique sua caixa de entrada e clique no link de redefinição que enviaremos</li>
+                            <li>Crie uma nova senha seguindo as instruções de segurança</li>
+                        </ol>
+                        <p>Se não receber o e-mail em alguns minutos, verifique sua pasta de spam.</p>
+                    </div>
+                </div>
+
+                <!-- Jogos e Atividades -->
+                <div class="faq-item" data-category="jogos">
+                    <div class="faq-question">
+                        <h3><i class="fas fa-puzzle-piece"></i> Como os jogos são personalizados para cada aluno?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nossa plataforma utiliza algoritmos inteligentes que adaptam os jogos educativos de acordo com:</p>
+                        <ul>
+                            <li>Idade e série escolar do aluno</li>
+                            <li>Desempenho em atividades anteriores</li>
+                            <li>Estilo de aprendizagem identificado (visual, auditivo, cinestésico)</li>
+                            <li>Áreas de interesse demonstradas durante o uso</li>
+                            <li>Velocidade de progresso e domínio dos conceitos</li>
+                        </ul>
+                        <p>Essa personalização garante que cada aluno receba desafios adequados ao seu nível, mantendo o engajamento e promovendo aprendizado eficaz.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="jogos">
+                    <div class="faq-question">
+                        <h3><i class="fas fa-chart-line"></i> Como acompanhar o progresso do meu filho/aluno?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pais e educadores podem acompanhar o progresso de várias formas:</p>
+                        <ul>
+                            <li><strong>Painel de Progresso:</strong> Visualize relatórios detalhados sobre desempenho em cada área de conhecimento</li>
+                            <li><strong>Relatórios Semanais:</strong> Receba por e-mail um resumo das atividades realizadas e conquistas</li>
+                            <li><strong>Metas e Conquistas:</strong> Acompanhe as metas estabelecidas e as conquistas alcançadas</li>
+                            <li><strong>Comparativo Evolutivo:</strong> Veja o desenvolvimento ao longo do tempo em gráficos interativos</li>
+                        </ul>
+                        <p>Para acessar esses recursos, basta fazer login como responsável ou educador.</p>
+                    </div>
+                </div>
+
+                <!-- Suporte Técnico -->
+                <div class="faq-item" data-category="tecnico">
+                    <div class="faq-question">
+                        <h3><i class="fas fa-desktop"></i> Quais dispositivos são compatíveis com a plataforma?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A Eduúnica é compatível com a maioria dos dispositivos e navegadores:</p>
+                        <ul>
+                            <li><strong>Computadores:</strong> Windows, macOS e Linux</li>
+                            <li><strong>Navegadores:</strong> Chrome, Firefox, Safari, Edge (versões atualizadas)</li>
+                            <li><strong>Tablets e Smartphones:</strong> iOS 12+ e Android 8+</li>
+                            <li><strong>Requisitos Mínimos:</strong> Conexão com internet, 2GB de RAM, tela com resolução mínima de 1024x768</li>
+                        </ul>
+                        <p>Para melhor experiência, recomendamos o uso dos navegadores mais recentes e conexão estável com internet.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="tecnico">
+                    <div class="faq-question">
+                        <h3><i class="fas fa-wifi"></i> O que fazer se um jogo não carrega corretamente?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Se estiver enfrentando problemas para carregar jogos, tente estas soluções:</p>
+                        <ol>
+                            <li>Verifique sua conexão com a internet</li>
+                            <li>Atualize seu navegador para a versão mais recente</li>
+                            <li>Limpe o cache e os cookies do navegador</li>
+                            <li>Desative temporariamente extensões ou bloqueadores de anúncios</li>
+                            <li>Tente acessar de um navegador diferente</li>
+                            <li>Reinicie seu dispositivo</li>
+                        </ol>
+                        <p>Se o problema persistir, entre em contato com nosso suporte técnico informando o navegador, dispositivo e uma descrição do problema.</p>
+                    </div>
+                </div>
+
+                <!-- Privacidade e Segurança -->
+                <div class="faq-item" data-category="privacidade">
+                    <div class="faq-question">
+                        <h3><i class="fas fa-shield-alt"></i> Como a Eduúnica protege os dados dos usuários?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A segurança e privacidade dos dados são nossas prioridades. Implementamos:</p>
+                        <ul>
+                            <li><strong>Criptografia:</strong> Todos os dados são transmitidos e armazenados com criptografia de ponta a ponta</li>
+                            <li><strong>Conformidade com LGPD:</strong> Seguimos rigorosamente a Lei Geral de Proteção de Dados</li>
+                            <li><strong>Controles de Acesso:</strong> Apenas pessoas autorizadas têm acesso às informações</li>
+                            <li><strong>Anonimização:</strong> Dados utilizados para análises são anonimizados</li>
+                            <li><strong>Backups Seguros:</strong> Realizamos backups regulares em servidores protegidos</li>
+                        </ul>
+                        <p>Para mais detalhes, consulte nossa <a href="politica-privacidade.html" style="color: #6a11cb;">Política de Privacidade completa</a>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="privacidade">
+                    <div class="faq-question">
+                        <h3><i class="fas fa-user-check"></i> Posso excluir minha conta e meus dados?</h3>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, você tem total controle sobre seus dados. Para excluir sua conta:</p>
+                        <ol>
+                            <li>Faça login em sua conta</li>
+                            <li>Acesse "Configurações da Conta" no menu do perfil</li>
+                            <li>Selecione a opção "Excluir Minha Conta"</li>
+                            <li>Confirme sua decisão seguindo as instruções</li>
+                        </ol>
+                        <p><strong>Atenção:</strong> A exclusão da conta é permanente e irreversível. Todos os seus dados, progresso e histórico serão removidos completamente de nossos sistemas dentro de 30 dias, conforme exigido pela legislação.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-support">
+                <h3><i class="fas fa-headset"></i> Não encontrou o que procurava?</h3>
+                <p>Nossa equipe de suporte está pronta para ajudar com qualquer dúvida adicional</p>
+                <button class="support-btn">
+                    <i class="fas fa-envelope"></i> Entrar em Contato
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre a Eduúnica</h3>
+                    <p>Projeto de TCC que visa promover inclusão através de jogos educativos para pessoas neurodivergentes de todas as idades, com diário de bordo para acompanhamento personalizado.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Página Inicial</a></li>
+                       <!-- <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>-->
+                        <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+                        <li><a href="FAQ.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="pp.html"><i class="fas fa-shield-alt"></i> Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="contact-info">
+                          <li><i class="fas fa-envelope"></i> contato@eduunica.com</li>
+                         <li><i class="fas fa-envelope"></i> erica.santos.lima15@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> (84) 98192-1744</li>
+                        <li><i class="fas fa-map-marker-alt"></i> UNIFAEL</li>
+                        <li><i class="fas fa-globe"></i> Erica Lima dos Santos - RA: 47518433</li>
+                    
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Eduúnica. Todos os direitos reservados. Porque cada mente merece uma educação sob medida.</p>
+            </div>
+        </div>
+    </footer>
+<!-- Botão Voltar ao Topo -->
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo da página">
+    <i class="fas fa-chevron-up"></i>
+</button>
+    <script>
+        // Botão Voltar ao Topo
+function initBackToTop() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    if (!backToTopButton) return;
+    
+    // Mostrar/ocultar botão baseado no scroll
+    function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    }
+    
+    // Função para voltar ao topo suavemente
+    function scrollToTop() {
+        // Verifica se o usuário prefere reduzir movimento
+        const prefersReducedMotion = document.body.classList.contains('reduce-motion');
+        
+        if (prefersReducedMotion) {
+            // Scroll instantâneo para quem prefere reduzir animação
+            window.scrollTo({
+                top: 0,
+                behavior: 'auto'
+            });
+        } else {
+            // Scroll suave para outros usuários
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Anuncia para leitores de tela
+        announceToScreenReader('Voltou ao topo da página');
+    }
+    
+    // Event Listeners
+    window.addEventListener('scroll', toggleBackToTop);
+    backToTopButton.addEventListener('click', scrollToTop);
+    
+    // Teclado - permitir ativação com Enter ou Espaço
+    backToTopButton.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToTop();
+        }
+    });
+    
+    // Verificar estado inicial
+    toggleBackToTop();
+}
+
+// Inicializar quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    initBackToTop();
+});
+        // Funcionalidade do FAQ
+        document.addEventListener('DOMContentLoaded', function() {
+            // Abrir/fechar perguntas
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    faqItem.classList.toggle('active');
+                });
+            });
+
+            // Filtro por categoria
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover classe active de todos os botões
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // Adicionar classe active ao botão clicado
+                    button.classList.add('active');
+                    
+                    const category = button.getAttribute('data-category');
+                    
+                    // Filtrar itens do FAQ
+                    faqItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Busca no FAQ
+            const searchBox = document.querySelector('.search-box');
+            
+            searchBox.addEventListener('input', () => {
+                const searchTerm = searchBox.value.toLowerCase();
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Botão de contato
+            const supportBtn = document.querySelector('.support-btn');
+            
+            supportBtn.addEventListener('click', () => {
+                alert('Redirecionando para nossa página de contato...');
+                // Em uma implementação real, isso redirecionaria para a página de contato
+                window.location.href = 'contato.html';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,663 @@
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="imagens/quebra-cabeca.png">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="EduÚnica - Plataforma educacional inclusiva para pessoas neurodivergentes com jogos adaptados e diário de bordo">
+        <meta name="keywords" content="educação inclusiva, neurodiversidade, autismo, TDAH, jogos educativos, acessibilidade">
+
+        <!-- Links para recursos de acessibilidade -->
+        <link rel="preload" href="style.css" as="style">
+        <script src="accessibility.js"></script>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
+
+        <!-- Esquema de cores para modo alto contraste -->
+        <meta name="color-scheme" content="light dark">
+                <script>
+                // Carrega imediatamente para estar disponível o mais rápido possível
+                document.documentElement.setAttribute('data-user-agent', navigator.userAgent);
+            </script>
+
+        <link rel="stylesheet" href="style.css">
+        <title>EduÚnica: HOME</title>
+
+        <!-- LINHA ADICIONADA - Font Awesome (já existe) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Botão Voltar ao Topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color, #4a90e2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--primary-dark, #357abd);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:focus {
+    outline: 3px solid var(--focus-color, #ffd700);
+    outline-offset: 2px;
+}
+
+/* Modo alto contraste */
+.high-contrast .back-to-top {
+    background: #000;
+    border: 2px solid #fff;
+}
+
+.high-contrast .back-to-top:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Reduzir movimento */
+.reduce-motion .back-to-top {
+    transition: none;
+}
+    </style>
+    </head>
+    <body>
+        <!-- Controles de Acessibilidade Flutuantes -->
+    <div class="accessibility-controls">
+        <button class="accessibility-toggle" 
+                aria-label="Abrir configurações de acessibilidade"
+                onclick="toggleAccessibilityPanel()">
+                
+            <i class="fas fa-universal-access"></i>
+        </button>
+        
+        <div class="accessibility-panel" id="accessibilityPanel">
+            <h3 class="sr-only">Configurações de Acessibilidade</h3>
+            
+            <div class="accessibility-option">
+                <input aria-required="true" aria-describedby="help-text" type="checkbox" id="highContrast" onchange="toggleHighContrast()">
+                <label for="highContrast">Alto Contraste</label>
+            </div>
+            
+            <div class="accessibility-option">
+                <input  aria-required="true" aria-describedby="help-text"type="checkbox" id="largeText" onchange="toggleLargeText()">
+                <label for="largeText">Texto Maior</label>
+            </div>
+            
+            <div class="accessibility-option">
+                <input  aria-required="true" aria-describedby="help-text" type="checkbox" id="reduceMotion" onchange="toggleReduceMotion()">
+                <label for="reduceMotion">Reduzir Animação</label>
+            </div>
+            
+            <div class="accessibility-option">
+                <input aria-required="true" aria-describedby="help-text" type="checkbox" id="colorblindMode" onchange="toggleColorblindMode()">
+                <label for="colorblindMode">Modo Daltonismo</label>
+            </div>
+            
+            <button onclick="resetAccessibility()" style="margin-top: 10px; width: 100%;">
+                <i class="fas fa-redo"></i> Redefinir
+            </button>
+        </div>
+    </div>
+
+    <!-- Link para pular para conteúdo principal (primeiro elemento do body) -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+
+    <!-- SVG para filtros de daltonismo (adicione no final do body) -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
+        <defs>
+            <filter id="protanopia">
+                <feColorMatrix type="matrix"
+                    values="0.567, 0.433, 0,     0, 0
+                            0.558, 0.442, 0,     0, 0
+                            0,     0.242, 0.758, 0, 0
+                            0,     0,     0,     1, 0" />
+            </filter>
+        </defs>
+    </svg>
+<!-- Botão Voltar ao Topo -->
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo da página">
+    <i class="fas fa-chevron-up"></i>
+</button>
+    <!-- Script de Acessibilidade -->
+    <script>
+        // Botão Voltar ao Topo
+function initBackToTop() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    if (!backToTopButton) return;
+    
+    // Mostrar/ocultar botão baseado no scroll
+    function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    }
+    
+    // Função para voltar ao topo suavemente
+    function scrollToTop() {
+        // Verifica se o usuário prefere reduzir movimento
+        const prefersReducedMotion = document.body.classList.contains('reduce-motion');
+        
+        if (prefersReducedMotion) {
+            // Scroll instantâneo para quem prefere reduzir animação
+            window.scrollTo({
+                top: 0,
+                behavior: 'auto'
+            });
+        } else {
+            // Scroll suave para outros usuários
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Anuncia para leitores de tela
+        announceToScreenReader('Voltou ao topo da página');
+    }
+    
+    // Event Listeners
+    window.addEventListener('scroll', toggleBackToTop);
+    backToTopButton.addEventListener('click', scrollToTop);
+    
+    // Teclado - permitir ativação com Enter ou Espaço
+    backToTopButton.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToTop();
+        }
+    });
+    
+    // Verificar estado inicial
+    toggleBackToTop();
+}
+
+// Inicializar quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    initBackToTop();
+});
+        // Detecta se usuário está navegando com teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.body.classList.add('user-is-tabbing');
+            }
+        });
+        
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('user-is-tabbing');
+        });
+
+        // Funções dos controles de acessibilidade
+        function toggleAccessibilityPanel() {
+            const panel = document.getElementById('accessibilityPanel');
+            panel.classList.toggle('show');
+        }
+
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            // Salva preferência
+            localStorage.setItem('highContrast', document.body.classList.contains('high-contrast'));
+        }
+
+        function toggleLargeText() {
+            document.body.classList.toggle('large-text');
+            localStorage.setItem('largeText', document.body.classList.contains('large-text'));
+        }
+
+        function toggleReduceMotion() {
+            document.body.classList.toggle('reduce-motion');
+            localStorage.setItem('reduceMotion', document.body.classList.contains('reduce-motion'));
+        }
+
+        function toggleColorblindMode() {
+            document.body.classList.toggle('colorblind-friendly');
+            localStorage.setItem('colorblindMode', document.body.classList.contains('colorblind-friendly'));
+        }
+
+        function resetAccessibility() {
+            document.body.classList.remove('high-contrast', 'large-text', 'reduce-motion', 'colorblind-friendly');
+            localStorage.removeItem('highContrast');
+            localStorage.removeItem('largeText');
+            localStorage.removeItem('reduceMotion');
+            localStorage.removeItem('colorblindMode');
+            
+            // Desmarca checkboxes
+            document.getElementById('highContrast').checked = false;
+            document.getElementById('largeText').checked = false;
+            document.getElementById('reduceMotion').checked = false;
+            document.getElementById('colorblindMode').checked = false;
+        }
+
+        // Carrega preferências salvas ao iniciar
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('highContrast') === 'true') {
+                document.body.classList.add('high-contrast');
+                document.getElementById('highContrast').checked = true;
+            }
+            if (localStorage.getItem('largeText') === 'true') {
+                document.body.classList.add('large-text');
+                document.getElementById('largeText').checked = true;
+            }
+            if (localStorage.getItem('reduceMotion') === 'true') {
+                document.body.classList.add('reduce-motion');
+                document.getElementById('reduceMotion').checked = true;
+            }
+            if (localStorage.getItem('colorblindMode') === 'true') {
+                document.body.classList.add('colorblind-friendly');
+                document.getElementById('colorblindMode').checked = true;
+            }
+        });
+
+        // Anuncia mudanças para leitores de tela
+        function announceToScreenReader(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.classList.add('sr-only');
+            announcement.textContent = message;
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
+    </script>
+
+    <!-- Imagem de fundo da tela inicial (oculta, apenas para referência) 
+        <div class="background-image-container">
+            <img class="background-image" src="https://assets-persist.lovart.ai/agent_images/f9504d1f-2540-4eba-946a-a4836d297776.jpg" alt="Tela inicial do EduÚnica">
+        </div>-->
+        <!-- Cabeçalho do site com logo e navegação -->
+            <header role="banner" aria-label="Cabeçalho principal">
+                <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="logo"><i class="fas fa-brain"></i> EduÚnica</h1>
+                    <p class="slogan">Porque cada mente merece uma educação sob medida</p>
+                </div>
+            </div>
+            <!-- Menu de navegação principal com ícones -->
+                <nav role="navigation" aria-label="Menu principal">
+                    <ul class="nav-links">
+                        <li><a href="home.html"><i class="fas fa-home"></i> Início</a></li>
+                        <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>
+                        <li><a href="diario.html"><i class="fas fa-book-open"></i> Diário de Bordo</a></li>
+                        <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+                        <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+                <main class="container" id="main-content" role="main" aria-label="Conteúdo principal">
+            <!-- Carrossel de Imagens -->
+            <section class="carousel-section">
+                <div class="carousel-container">
+                    <div class="carousel-slides">
+                        <div class="slide active">
+                            <img src="imagens/imagem1.jpg" alt="Aprendizado personalizado">
+                            <div class="slide-content">
+                                <h2>Educação Inclusiva</h2>
+                                <p>Jogos educativos adaptados para diferentes necessidades</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="imagens/imagem2.jpg" alt="Desenvolvimento cognitivo">
+                            <div class="slide-content">
+                                <h2>Desenvolvimento Cognitivo</h2>
+                                <p>Estimule habilidades de forma divertida e eficaz</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="imagens/imagem3.jpg" alt="Acompanhamento personalizado">
+                            <div class="slide-content">
+                                <h2>Acompanhamento Personalizado</h2>
+                                <p>Diário de bordo para monitorar o progresso</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="carousel-indicators">
+                        <span class="indicator active"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Boas-Vindas -->
+            <section class="welcome-section">
+                <div class="welcome-container">
+                    <div class="welcome-text">
+                        <h2>Bem-vindo ao EduÚnica</h2>
+                        <p>Uma plataforma educacional inovadora criada para atender às necessidades de pessoas neurodivergentes. Através de jogos educativos personalizados e ferramentas de acompanhamento, promovemos um aprendizado significativo e inclusivo.</p>
+                        <div class="welcome-stats">
+                            <div class="stat">
+                                <h3>10+</h3>
+                                <p>Jogos Educativos</p>
+                            </div>
+                            <div class="stat">
+                                <h3>10+</h3>
+                                <p>Usuários Ativos</p>
+                            </div>
+                            <div class="stat">
+                                <h3>10/10</h3>
+                                <p>Suporte Personalizado</p>
+                            </div>
+                        </div>
+                        <a href="perfil.html" class="cta-button">
+                            <i class="fas fa-rocket"></i>  Meu perfil
+                        </a>
+                    </div>
+                    <div class="welcome-image">
+                        <!--IMAGEM DE BOAS VINDAS-->
+                        <img src="imagens/boasvindas.png" alt="Educação inclusiva">
+                    </div>
+                </div>
+            </section>
+
+        <!-- Seção de Vídeos Educativos -->
+            <!--VIDEO 1-->
+    <section class="videos-section">
+        <h2 class="section-title"><i class="fas fa-play-circle"></i> Conteúdo Educativo</h2>
+        <div class="videos-container">
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/caZuYF9EKeg" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen 
+                            title="Vídeo sobre Autismo">
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Entendendo o Autismo</h3>
+                    <p>Conheça mais sobre o Transtorno do Espectro Autista e estratégias de aprendizado com Mayra Gaiato.</p>
+                    <div class="video-tags">
+                        <span class="tag"><i class="fas fa-tag"></i> Autismo</span>
+                        <span class="tag"><i class="fas fa-clock"></i> 10 min</span>
+                    </div>
+                </div>
+            </div>
+            <!--VIDEO 2-->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/daFxr56hSIE" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen 
+                            title="Vídeo sobre TDAH">
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h3>TDAH na Infância</h3>
+                    <p>Estratégias para apoiar crianças com TDAH no processo de aprendizado, segundo Mayra Gaiato.</p>
+                    <div class="video-tags">
+                        <span class="tag"><i class="fas fa-tag"></i> TDAH</span>
+                        <span class="tag"><i class="fas fa-clock"></i> 8 min</span>
+                    </div>
+                </div>
+            </div>
+            <!--VIDEO 3-->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/68YP_leHND8?si=LgK8qoKdi78Rv_tH" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen 
+                            title="Vídeo sobre Neurodiversidade">
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h3>O que é Neurodiversidade?</h3>
+                    <p>Reportagem para compreender a diversidade cognitiva e sua importância na inclusão.</p>
+                    <div class="video-tags">
+                        <span class="tag"><i class="fas fa-tag"></i> Neurodiversidade</span>
+                        <span class="tag"><i class="fas fa-clock"></i> 3 min</span>
+                    </div>
+                </div>
+            </div>
+    <!--VIDEO 4-->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/sAXf6o8Av7Q?si=S3RD_RojR0q1gOGU" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen 
+                            title="Vídeo sobre Autismo">
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Universo Singular de Pessoas com Autismo</h3>
+                    <p>Podcast sobre a partivularidade de uma pessoa com autrismo por PodPeople.</p>
+                    <div class="video-tags">
+                        <span class="tag"><i class="fas fa-tag"></i> Autismo </span>
+                        <span class="tag"><i class="fas fa-clock"></i> 4 min</span>
+                    </div>
+                </div>
+            </div>
+             <!--VIDEO 5-->
+                 <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/n4LreCcEbG4?si=skdgd-1wODJmn_JB" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen 
+                            title="Vídeo sobre Inclusão">
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Desenho: Inclusão </h3>
+                    <p>Animação que trabalha em cima do tema inclusão.</p>
+                    <div class="video-tags">
+                        <span class="tag"><i class="fas fa-tag"></i> Inclusão </span>
+                        <span class="tag"><i class="fas fa-clock"></i> 10 min</span>
+                    </div>
+                </div>
+            </div>
+
+              <!--VIDEO 6-->
+               <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/Ff2fgJ8XgN0?si=cQt5a2MITa1dXDAe" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen 
+                            title="Vídeo sobre Dislexia e Discalculia">
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h3>O que é Dislexia e Descalculia? </h3>
+                    <p>Animação que trabalha em cima do tema inclusão.</p>
+                    <div class="video-tags">
+                        <span class="tag"><i class="fas fa-tag"></i> Dislexia e Descalculia </span>
+                        <span class="tag"><i class="fas fa-clock"></i> 2 min</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+<!-- Seção de Recursos -->
+        <section class="resources-section">
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Nossos Recursos</h2>
+            <div class="resources-grid">
+                <a href="jogos.html" class="resource-card-link">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Jogos Educativos</h3>
+                        <p>Jogos personalizados para desenvolver habilidades cognitivas, sociais e emocionais</p>
+                        <span class="resource-link">Acessar Jogos <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+                
+                <a href="diario.html" class="resource-card-link">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Diário de Bordo</h3>
+                        <p>Acompanhe o progresso e conquistas com nosso sistema de monitoramento
+                            <br></p>
+                        <span class="resource-link">Acessar Diário <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+                
+                <a href="diario.html" class="resource-card-link">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Relatórios de Progresso</h3>
+                        <p>Análises detalhadas do desenvolvimento e sugestões personalizadas</p>
+                        <span class="resource-link">Ver Perfil <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+                
+                <a href="contato.html" class="resource-card-link">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Suporte Especializado</h3>
+                        <p>Equipe multidisciplinar para orientar famílias e educadores</p>
+                        <span class="resource-link">Saiba Mais <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+        </section>
+        </main>
+
+        <!-- Rodapé do site com informações de contato e links úteis -->
+        <footer  role="contentinfo" aria-label="Rodapé">
+            <div class="container">
+                <div class="footer-content">
+                    <!-- Coluna 1: Sobre o projeto -->
+                    <div class="footer-column">
+                        <h3>Sobre o EduÚnica</h3>
+                        <p>Projeto de TCC que visa promover inclusão através de jogos educativos para pessoas neurodivergentes de todas as idades, com diário de bordo para acompanhamento personalizado.</p>
+                        <div class="social-icons">
+                            <a href="sobre.html" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="sobre.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="sobre.html" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="sobre.html" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Coluna 2: Links rápidos -->
+                    <div class="footer-column">
+                        <h3>Links Rápidos</h3>
+                        <ul>
+                            <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos Educativos</a></li>
+                            <li><a href="diario.html"><i class="fas fa-book-open"></i> Diário de Bordo</a></li>
+                            <li><a href="FAQ.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                            <li><a href="contato.html"><i class="fas fa-hands-helping"></i> Suporte</a></li>
+                            <li><a href="pp.html"><i class="fas fa-shield-alt"></i> Política de Privacidade</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Coluna 3: Contato -->
+                    <div class="footer-column">
+                        <h3>Contato</h3>
+                        <ul class="contact-info">
+                            <li><i class="fas fa-envelope"></i> erica.santos.lima15@gmail.com</li>
+                            <li><i class="fas fa-phone"></i> (84) 98192-1744</li>
+                            <li><i class="fas fa-map-marker-alt"></i> UNIFAEL</li>
+                            <li><i class="fas fa-globe"></i> Erica Lima dos Santos - RA: 47518433</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Direitos autorais -->
+                <div class="copyright">
+                    <p>&copy; 2025 EduÚnica - Todos os direitos reservados | Projeto de TCC</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Script para carregar os ícones do Font Awesome -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+        <script src="home.js"></script>
+
+                     <!-- Link para pular para conteúdo principal (deve ser o PRIMEIRO elemento) -->
+            <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+
+            <!-- SVG para filtros de daltonismo -->
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
+                <defs>
+                    <filter id="protanopia">
+                        <feColorMatrix type="matrix"
+                            values="0.567, 0.433, 0,     0, 0
+                                    0.558, 0.442, 0,     0, 0
+                                    0,     0.242, 0.758, 0, 0
+                                    0,     0,     0,     1, 0" />
+                    </filter>
+                </defs>
+            </svg>
+
+            <!-- Script do sistema de acessibilidade -->
+            <script src="js/accessibility.js"></script>
+
+            <!-- Script de inicialização rápida -->
+            <script>
+            // Aplica configurações imediatamente para evitar FOUC (Flash of Unstyled Content)
+            (function() {
+                const savedSettings = localStorage.getItem('eduunica_accessibility');
+                if (savedSettings) {
+                    const settings = JSON.parse(savedSettings);
+                    if (settings.highContrast) document.body.classList.add('high-contrast');
+                    if (settings.largeText) document.body.classList.add('large-text');
+                    if (settings.reduceMotion) document.body.classList.add('reduce-motion');
+                    if (settings.colorblindMode) document.body.classList.add('colorblind-friendly');
+                }
+            })();
+            </script>
+
+            <script>
+    // Carregar Font Awesome dinamicamente se não carregou
+    if (!document.querySelector('.fa-brain')) {
+        console.log('Font Awesome não carregou, carregando dinamicamente...');
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+        document.head.appendChild(link);
+    }
+</script>
+    <!-- Botão Voltar ao Topo -->
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo da página">
+    <i class="fas fa-chevron-up"></i>
+</button>
+    </body>
+
+    </html>

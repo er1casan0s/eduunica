@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="imagens/quebra-cabeca.png">
+
+    <meta name="description" content="EduÚnica - Plataforma educacional inclusiva para pessoas neurodivergentes com jogos adaptados e diário de bordo">
+    <meta name="keywords" content="educação inclusiva, neurodiversidade, autismo, TDAH, jogos educativos, acessibilidade">
+
+    <!-- Links para recursos de acessibilidade -->
+    <link rel="preload" href="style.css" as="style">
+    <script src="accessibility.js"></script>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
+
+    <!-- Esquema de cores para modo alto contraste -->
+    <meta name="color-scheme" content="light dark">
+    
+    <script>
+        // Carrega imediatamente para estar disponível o mais rápido possível
+        document.documentElement.setAttribute('data-user-agent', navigator.userAgent);
+    </script>
+
+    <title>EduÚnica: Meu Perfil</title>
+
+   <!-- LINHA ADICIONADA - Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Botão Voltar ao Topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color, #4a90e2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--primary-dark, #357abd);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:focus {
+    outline: 3px solid var(--focus-color, #ffd700);
+    outline-offset: 2px;
+}
+
+/* Modo alto contraste */
+.high-contrast .back-to-top {
+    background: #000;
+    border: 2px solid #fff;
+}
+
+.high-contrast .back-to-top:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Reduzir movimento */
+.reduce-motion .back-to-top {
+    transition: none;
+}
+    </style>
+</head>
+<body>
+     <!-- Controles de Acessibilidade Flutuantes -->
+<div class="accessibility-controls">
+    <button class="accessibility-toggle" 
+            aria-label="Abrir configurações de acessibilidade"
+            onclick="toggleAccessibilityPanel()">
+            
+        <i class="fas fa-universal-access"></i>
+    </button>
+    
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <h3 class="sr-only">Configurações de Acessibilidade</h3>
+        
+        <div class="accessibility-option">
+            <input aria-required="true" aria-describedby="help-text" type="checkbox" id="highContrast" onchange="toggleHighContrast()">
+            <small id="help-text" class="sr-only">Texto de ajuda</small>
+            <label for="highContrast">Alto Contraste</label>
+        </div>
+        
+        <div class="accessibility-option">
+            <input aria-required="true" aria-describedby="help-text" type="checkbox" id="largeText" onchange="toggleLargeText()">
+            <small id="help-text" class="sr-only">Texto de ajuda</small>
+            <label for="largeText">Texto Maior</label>
+        </div>
+        
+        <div class="accessibility-option">
+            <input  aria-required="true" aria-describedby="help-text" type="checkbox" id="reduceMotion" onchange="toggleReduceMotion()">
+            <small id="help-text" class="sr-only">Texto de ajuda</small>
+            <label for="reduceMotion">Reduzir Animação</label>
+        </div>
+        
+        <div class="accessibility-option">
+            <input aria-required="true" aria-describedby="help-text" type="checkbox" id="colorblindMode" onchange="toggleColorblindMode()">
+            <small id="help-text" class="sr-only">Texto de ajuda</small>
+            <label for="colorblindMode">Modo Daltonismo</label>
+        </div>
+        
+        <button onclick="resetAccessibility()" style="margin-top: 10px; width: 100%;">
+            <i class="fas fa-redo"></i> Redefinir
+        </button>
+    </div>
+</div>
+
+<!-- Link para pular para conteúdo principal (primeiro elemento do body) -->
+<a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+
+<!-- SVG para filtros de daltonismo (adicione no final do body) -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
+    <defs>
+        <filter id="protanopia">
+            <feColorMatrix type="matrix"
+                values="0.567, 0.433, 0,     0, 0
+                        0.558, 0.442, 0,     0, 0
+                        0,     0.242, 0.758, 0, 0
+                        0,     0,     0,     1, 0" />
+        </filter>
+    </defs>
+</svg>
+
+<!-- Script de Acessibilidade -->
+<script>
+    // Detecta se usuário está navegando com teclado
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            document.body.classList.add('user-is-tabbing');
+        }
+    });
+    
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('user-is-tabbing');
+    });
+
+    // Funções dos controles de acessibilidade
+    function toggleAccessibilityPanel() {
+        const panel = document.getElementById('accessibilityPanel');
+        panel.classList.toggle('show');
+    }
+
+    function toggleHighContrast() {
+        document.body.classList.toggle('high-contrast');
+        // Salva preferência
+        localStorage.setItem('highContrast', document.body.classList.contains('high-contrast'));
+    }
+
+    function toggleLargeText() {
+        document.body.classList.toggle('large-text');
+        localStorage.setItem('largeText', document.body.classList.contains('large-text'));
+    }
+
+    function toggleReduceMotion() {
+        document.body.classList.toggle('reduce-motion');
+        localStorage.setItem('reduceMotion', document.body.classList.contains('reduce-motion'));
+    }
+
+    function toggleColorblindMode() {
+        document.body.classList.toggle('colorblind-friendly');
+        localStorage.setItem('colorblindMode', document.body.classList.contains('colorblind-friendly'));
+    }
+
+    function resetAccessibility() {
+        document.body.classList.remove('high-contrast', 'large-text', 'reduce-motion', 'colorblind-friendly');
+        localStorage.removeItem('highContrast');
+        localStorage.removeItem('largeText');
+        localStorage.removeItem('reduceMotion');
+        localStorage.removeItem('colorblindMode');
+        
+        // Desmarca checkboxes
+        document.getElementById('highContrast').checked = false;
+        document.getElementById('largeText').checked = false;
+        document.getElementById('reduceMotion').checked = false;
+        document.getElementById('colorblindMode').checked = false;
+    }
+
+    // Carrega preferências salvas ao iniciar
+    window.addEventListener('load', function() {
+        if (localStorage.getItem('highContrast') === 'true') {
+            document.body.classList.add('high-contrast');
+            document.getElementById('highContrast').checked = true;
+        }
+        if (localStorage.getItem('largeText') === 'true') {
+            document.body.classList.add('large-text');
+            document.getElementById('largeText').checked = true;
+        }
+        if (localStorage.getItem('reduceMotion') === 'true') {
+            document.body.classList.add('reduce-motion');
+            document.getElementById('reduceMotion').checked = true;
+        }
+        if (localStorage.getItem('colorblindMode') === 'true') {
+            document.body.classList.add('colorblind-friendly');
+            document.getElementById('colorblindMode').checked = true;
+        }
+    });
+
+    // Anuncia mudanças para leitores de tela
+    function announceToScreenReader(message) {
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('aria-atomic', 'true');
+        announcement.classList.add('sr-only');
+        announcement.textContent = message;
+        document.body.appendChild(announcement);
+        
+        setTimeout(() => {
+            document.body.removeChild(announcement);
+        }, 1000);
+    }
+</script>
+    <!-- Imagem de fundo da tela inicial 
+    <div class="background-image-container">
+        <img class="background-image" src="https://assets-persist.lovart.ai/agent_images/f9504d1f-2540-4eba-946a-a4836d297776.jpg" alt="Tela inicial do EduÚnica">
+    </div>-->
+
+    <!-- Cabeçalho do site com logo e navegação -->
+    <header role="banner" aria-label="Cabeçalho principal">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="logo"><i class="fas fa-brain"></i> EduÚnica</h1>
+                    <p class="slogan">Porque cada mente merece uma educação sob medida</p>
+                </div>
+            </div>
+            <!-- Menu de navegação principal com ícones -->
+            <nav role="navigation" aria-label="Menu principal">
+                <ul class="nav-links">
+                    <li><a href="home.html"><i class="fas fa-home"></i> Início</a></li>
+                    <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos</a></li>
+                    <li><a href="diario.html"><i class="fas fa-book-open"></i> Diário de Bordo</a></li>
+                    <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+                    <li><a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre Nós</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" id="main-content" role="main" aria-label="Conteúdo principal">
+        <!-- Seção do Perfil do Usuário -->
+        <section class="profile-section">
+            <div class="profile-header">
+                <h2><i class="fas fa-user-circle"></i> Meu Perfil</h2>
+                <p>Gerencie suas informações pessoais e preferências</p>
+            </div>
+
+            <div class="profile-container">
+                <!-- Coluna da Foto do Perfil -->
+                <div class="profile-photo-column">
+                    <div class="photo-container">
+                        <!-- Foto do perfil - pode ser alterada sem senha -->
+                        <div class="profile-photo" id="profilePhoto">
+                            <img src="imagens/avatar-default.png" alt="Foto do perfil" id="profileImage">
+                            <div class="photo-overlay">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        <!-- Input oculto para upload de foto -->
+                        <input aria-required="true" aria-describedby="help-text-photo" type="file" id="photoUpload" accept="image/*" style="display: none;">
+                        <small id="help-text-photo" class="sr-only">Texto de ajuda para upload de foto</small>
+                        <button class="change-photo-btn" onclick="document.getElementById('photoUpload').click()">
+                            <i class="fas fa-sync-alt"></i> Alterar Foto
+                        </button>
+                        <p class="photo-help">Clique na foto para alterar</p>
+                    </div>
+
+                    <!-- Estatísticas Rápidas -->
+                    <div class="profile-stats">
+                        <h4>Estatísticas</h4>
+                        <div class="stat-item">
+                            <i class="fas fa-gamepad"></i>
+                            <span>15 Jogos Concluídos</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>8 Conquistas</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>30 Dias Ativo</span>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Sair -->
+                    <div class="profile-actions">
+                        <button class="logout-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Coluna das Informações do Perfil -->
+                <div class="profile-info-column">
+                    <!-- Formulário de Informações Pessoais -->
+                    <div class="info-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-user-edit"></i> Informações Pessoais</h3>
+                            <button class="edit-btn" onclick="toggleEdit('personalInfo')">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                        </div>
+
+                        <form id="personalInfoForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="fullName">Nome Completo</label>
+                                <input aria-required="true" aria-describedby="help-text-name" type="text" id="fullName" name="fullName" value="Erica Santos" readonly>
+                                <small id="help-text-name" class="sr-only">Texto de ajuda para nome completo</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input aria-required="true" aria-describedby="help-text-email" type="email" id="email" name="email" value="erica.santos@email.com" readonly>
+                                <small id="help-text-email" class="sr-only">Texto de ajuda para e-mail</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="birthDate">Data de Nascimento</label>
+                                <input aria-required="true" aria-describedby="help-text-birth" type="date" id="birthDate" name="birthDate" value="1996-08-27" readonly>
+                                <small id="help-text-birth" class="sr-only">Texto de ajuda para data de nascimento</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Telefone</label>
+                                <input aria-required="true" aria-describedby="help-text-phone" type="tel" id="phone" name="phone" value="(84) 99999-9999" readonly>
+                                <small id="help-text-phone" class="sr-only">Texto de ajuda para telefone</small>
+                            </div>
+
+                            <!-- Campo de senha atual apenas quando em modo de edição -->
+                            <div id="personalInfoPasswordSection" class="password-section" style="display: none;">
+                                <div class="form-group">
+                                    <label for="currentPassword">Senha Atual *</label>
+                                    <div class="password-input-container">
+                                        <input aria-required="true" aria-describedby="help-text-current-password" type="password" id="currentPassword" name="currentPassword" 
+                                            placeholder="Digite sua senha atual para confirmar">
+                                        <small id="help-text-current-password" class="sr-only">Texto de ajuda para senha atual</small>
+                                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('currentPassword', this)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <small class="error-message" id="passwordError"></small>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="cancel-btn" onclick="cancelEdit('personalInfo')">
+                                        <i class="fas fa-times"></i> Cancelar
+                                    </button>
+                                    <button type="submit" class="save-btn">
+                                        <i class="fas fa-check"></i> Salvar Alterações
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Formulário de Preferências -->
+                    <div class="info-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-cog"></i> Preferências</h3>
+                            <button class="edit-btn" onclick="toggleEdit('preferences')">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                        </div>
+
+                        <form id="preferencesForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="userType">Tipo de Usuário</label>
+                                <select id="userType" name="userType" disabled>
+                                    <option value="student" selected>Estudante</option>
+                                    <option value="parent">Responsável</option>
+                                    <option value="educator">Educador</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Neurodiversidade</label>
+                                <div class="checkbox-group">
+                                    <input aria-required="true" aria-describedby="help-text-autism" type="checkbox" id="autism" name="neurodiversity" value="autism" disabled checked>
+                                    <label for="autism">Autismo</label>
+                                    <small id="help-text-autism" class="sr-only">Texto de ajuda para autismo</small>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input aria-required="true" aria-describedby="help-text-adhd" type="checkbox" id="adhd" name="neurodiversity" value="adhd" disabled>
+                                    <label for="adhd">TDAH</label>
+                                    <small id="help-text-adhd" class="sr-only">Texto de ajuda para TDAH</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="learningStyle">Estilo de Aprendizado Preferido</label>
+                                <select id="learningStyle" name="learningStyle" disabled>
+                                    <option value="visual" selected>Visual</option>
+                                    <option value="auditory">Auditivo</option>
+                                    <option value="kinesthetic">Cinestésico</option>
+                                </select>
+                            </div>
+
+                            <!-- Área de confirmação de senha para preferências -->
+                            <div id="preferencesPasswordSection" class="password-section" style="display: none;">
+                                <div class="form-group">
+                                    <label for="preferencesPassword">Senha Atual *</label>
+                                    <div class="password-input-container">
+                                        <input aria-required="true" aria-describedby="help-text-preferences-password" type="password" id="preferencesPassword" name="preferencesPassword" 
+                                            placeholder="Digite sua senha atual para confirmar">
+                                        <small id="help-text-preferences-password" class="sr-only">Texto de ajuda para senha atual das preferências</small>
+                                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('preferencesPassword', this)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <small class="error-message" id="preferencesPasswordError"></small>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="cancel-btn" onclick="cancelEdit('preferences')">
+                                        <i class="fas fa-times"></i> Cancelar
+                                    </button>
+                                    <button type="submit" class="save-btn">
+                                        <i class="fas fa-check"></i> Salvar Preferências
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Formulário de Segurança -->
+                    <div class="info-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-shield-alt"></i> Segurança</h3>
+                        </div>
+
+                        <form id="securityForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="securityNewPassword">Nova Senha</label>
+                                <div class="password-input-container">
+                                    <input aria-required="true" aria-describedby="help-text-new-password" type="password" id="securityNewPassword" name="securityNewPassword" 
+                                        placeholder="Digite a nova senha (8 dígitos)"
+                                        pattern="\d{8}"
+                                        maxlength="8"
+                                        oninput="this.value = this.value.replace(/\D/g, '')">
+                                    <small id="help-text-new-password" class="sr-only">Texto de ajuda para nova senha</small>
+                                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('securityNewPassword', this)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="securityConfirmPassword">Confirmar Nova Senha</label>
+                                <div class="password-input-container">
+                                    <input aria-required="true" aria-describedby="help-text-confirm-password" type="password" id="securityConfirmPassword" name="securityConfirmPassword" 
+                                        placeholder="Confirme a nova senha"
+                                        pattern="\d{8}"
+                                        maxlength="8"
+                                        oninput="this.value = this.value.replace(/\D/g, '')">
+                                    <small id="help-text-confirm-password" class="sr-only">Texto de ajuda para confirmar senha</small>
+                                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('securityConfirmPassword', this)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="securityCurrentPassword">Senha Atual *</label>
+                                <div class="password-input-container">
+                                    <input aria-required="true" aria-describedby="help-text-security-password" type="password" id="securityCurrentPassword" name="securityCurrentPassword" 
+                                        placeholder="Digite sua senha atual para confirmar"
+                                        required>
+                                    <small id="help-text-security-password" class="sr-only">Texto de ajuda para senha atual de segurança</small>
+                                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('securityCurrentPassword', this)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <small class="error-message" id="securityPasswordError"></small>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">
+                                    <i class="fas fa-key"></i> Alterar Senha
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé do site com informações de contato e links úteis -->
+    <footer role="contentinfo" aria-label="Rodapé">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Coluna 1: Sobre o projeto -->
+                <div class="footer-column">
+                    <h3>Sobre o EduÚnica</h3>
+                    <p>Projeto de TCC que visa promover inclusão através de jogos educativos para pessoas neurodivergentes de todas as idades, com diário de bordo para acompanhamento personalizado.</p>
+                    <div class="social-icons">
+                        <a href="home.html" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="home.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="home.html" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/erica-santos-851b75191/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Coluna 2: Links rápidos -->
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="jogos.html"><i class="fas fa-gamepad"></i> Jogos Educativos</a></li>
+                        <li><a href="diario.html"><i class="fas fa-book-open"></i> Diário de Bordo</a></li>
+                        <li><a href="FAQ.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="contato.html"><i class="fas fa-hands-helping"></i> Suporte</a></li>
+                        <li><a href="pp.html"><i class="fas fa-shield-alt"></i> Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Coluna 3: Contato -->
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> erica.santos.lima15@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> (84) 98192-1744</li>
+                        <li><i class="fas fa-map-marker-alt"></i> UNIFAEL</li>
+                        <li><i class="fas fa-globe"></i> Erica Lima dos Santos - RA: 47518433</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Direitos autorais -->
+            <div class="copyright">
+                <p>&copy; 2025 EduÚnica - Todos os direitos reservados | Projeto de TCC</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Botão Voltar ao Topo -->
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo da página">
+    <i class="fas fa-chevron-up"></i>
+</button>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="perfil.js"></script>
+
+    <script>
+        // Botão Voltar ao Topo
+function initBackToTop() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    if (!backToTopButton) return;
+    
+    // Mostrar/ocultar botão baseado no scroll
+    function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    }
+    
+    // Função para voltar ao topo suavemente
+    function scrollToTop() {
+        // Verifica se o usuário prefere reduzir movimento
+        const prefersReducedMotion = document.body.classList.contains('reduce-motion');
+        
+        if (prefersReducedMotion) {
+            // Scroll instantâneo para quem prefere reduzir animação
+            window.scrollTo({
+                top: 0,
+                behavior: 'auto'
+            });
+        } else {
+            // Scroll suave para outros usuários
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Anuncia para leitores de tela
+        announceToScreenReader('Voltou ao topo da página');
+    }
+    
+    // Event Listeners
+    window.addEventListener('scroll', toggleBackToTop);
+    backToTopButton.addEventListener('click', scrollToTop);
+    
+    // Teclado - permitir ativação com Enter ou Espaço
+    backToTopButton.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToTop();
+        }
+    });
+    
+    // Verificar estado inicial
+    toggleBackToTop();
+}
+
+// Inicializar quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    initBackToTop();
+});
+    // Carregar Font Awesome dinamicamente se não carregou
+    if (!document.querySelector('.fa-brain')) {
+        console.log('Font Awesome não carregou, carregando dinamicamente...');
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+        document.head.appendChild(link);
+    }
+</script>
+</body>
+</html>

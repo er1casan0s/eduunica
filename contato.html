@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Eduúnica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== VARIÁVEIS PARA ALTO CONTRASTE ===== */
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --text-color: #333333;
+            --background-color: #ffffff;
+            --contrast-ratio: 4.5; /* WCAG AA */
+        }
+
+        /* ===== ESTILOS GERAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* CORREÇÃO: Garantir que o body ocupe 100% da altura da viewport */
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Garante altura mínima de 100% da viewport */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== CABEÇALHO ===== */
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #e0e0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #ffffff;
+        }
+
+        .slogan {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-top: 5px;
+            color: #e0e0ff;
+        }
+
+        /* ===== NAVEGAÇÃO ===== */
+        nav {
+            background-color: #ffffff;
+            border-radius: 30px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li a i {
+            margin-right: 8px;
+        }
+
+        .nav-links li a:hover {
+            background-color: #f0f0ff;
+            color: #2575fc;
+        }
+
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        /* CORREÇÃO: Garantir que o main ocupe o espaço disponível */
+        main {
+            flex: 1; /* Faz o main ocupar todo o espaço disponível */
+            width: 100%;
+        }
+
+        .contact-section {
+            margin: 40px 0;
+            min-height: calc(100vh - 400px); /* Garante altura mínima baseada na viewport */
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-header h2 {
+            color: #6a11cb;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-header h2 i {
+            margin-right: 15px;
+        }
+
+        .contact-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .contact-info h3 {
+            color: #6a11cb;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info h3 i {
+            margin-right: 10px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .contact-method:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-details h4 {
+            color: #6a11cb;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .contact-details p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .contact-details a {
+            color: #2575fc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: #6a11cb;
+            text-decoration: underline;
+        }
+
+        .contact-form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form-container h3 {
+            color: #6a11cb;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-form-container h3 i {
+            margin-right: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #f0f0f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #6a11cb;
+            background-color: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-btn i {
+            margin-right: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+
+        /* Modal de Confirmação */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: modalAppear 0.3s ease;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .modal-icon i {
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .modal h3 {
+            color: #6a11cb;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .modal p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .modal-btn.home {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+
+        .modal-btn.faq {
+            background: #f5f7fa;
+            color: #6a11cb;
+            border: 2px solid #6a11cb;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
+        }
+
+        .modal-btn i {
+            margin-right: 8px;
+        }
+
+/* ===== RODAPÉ CORRIGIDO ===== */
+footer {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 40px 0 20px;
+    margin-top: auto;
+    width: 100%;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+footer .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+footer .footer-column h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+footer .footer-column h3::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background-color: white;
+    margin-top: 10px;
+}
+
+footer .footer-column p {
+    color: #e0e0ff;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+footer .footer-column ul {
+    list-style: none;
+}
+
+footer .footer-column ul li {
+    margin-bottom: 10px;
+}
+
+footer .footer-column ul li a {
+    color: #e0e0ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+footer .footer-column ul li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+footer .footer-column ul li a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* CORREÇÃO: Estilos específicos para a lista de contato no rodapé */
+footer .footer-column .contact-info {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+footer .footer-column .contact-info li {
+    background: transparent !important;
+    margin-bottom: 12px;
+    padding: 0 !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+}
+
+footer .footer-column .contact-info li i {
+    color: #e0e0ff;
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+footer .footer-column .contact-info li:hover i {
+    color: white;
+}
+
+footer .copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    color: #e0e0ff;
+}        /* Botão Voltar ao Topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color, #4a90e2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--primary-dark, #357abd);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:focus {
+    outline: 3px solid var(--focus-color, #ffd700);
+    outline-offset: 2px;
+}
+
+/* Modo alto contraste */
+.high-contrast .back-to-top {
+    background: #000;
+    border: 2px solid #fff;
+}
+
+.high-contrast .back-to-top:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Reduzir movimento */
+.reduce-motion .back-to-top {
+    transition: none;
+}
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="logo"><i class="fas fa-brain"></i> EduÚnica</h1>
+                    <p class="slogan">Porque cada mente merece uma educação sob medida</p>
+                </div>
+            </div>
+            
+            <!-- Navegação -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="home.html"><i class="fas fa-home"></i> Início</a></li>
+                    <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+                    <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    <li><a href="contato.html" class="active"><i class="fas fa-envelope"></i> Suporte</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <section class="contact-section">
+            <div class="contact-header">
+                <h2><i class="fas fa-envelope"></i> Entre em Contato</h2>
+                <p>Tem alguma dúvida, sugestão ou precisa de ajuda? Estamos aqui para você!</p>
+            </div>
+
+            <div class="contact-container">
+                <!-- Informações de Contato -->
+                <div class="contact-info">
+                    <h3><i class="fas fa-info-circle"></i> Nossos Canais</h3>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>E-mail</h4>
+                            <p>Respondemos em até 24 horas</p>
+                            <a href="mailto:contato@eduunica.com">contato@eduunica.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telefone</h4>
+                            <p>Segunda a sexta, 8h às 18h</p>
+                            <a href="tel:+5584981921744">(84) 98192-1744</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Chat Online</h4>
+                            <p>Suporte em tempo real</p>
+                            <p>Disponível das 9h às 17h</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Endereço</h4>
+                            <p>Polo Capim Macio</p>
+                            <p>UNIFAEL</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário de Contato -->
+                <div class="contact-form-container">
+                    <h3><i class="fas fa-paper-plane"></i> Envie sua Mensagem</h3>
+                    
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nome Completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Selecione o assunto</option>
+                                <option value="duvida">Dúvida sobre a plataforma</option>
+                                <option value="sugestao">Sugestão de melhoria</option>
+                                <option value="problema">Problema técnico</option>
+                                <option value="parceria">Proposta de parceria</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="message" placeholder="Descreva sua dúvida, sugestão ou problema..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3>Mensagem Enviada!</h3>
+            <p>Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.</p>
+            <p><strong>Obrigado por entrar em contato com a Eduúnica!</strong></p>
+            <div class="modal-actions">
+                <button class="modal-btn home" id="goHome">
+                    <i class="fas fa-home"></i> Voltar para a Página Inicial
+                </button>
+                <button class="modal-btn faq" id="goFaq">
+                    <i class="fas fa-question-circle"></i> Voltar para o FAQ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre a Eduúnica</h3>
+                    <p>A Eduúnica é uma plataforma educativa inovadora que oferece experiências de aprendizado personalizadas para cada estudante.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="home.html"><i class="fas fa-home"></i> Página Inicial</a></li>
+                        
+                        <li><a href="perfil.html"><i class="fas fa-user"></i> Perfil</a></li>
+                        <li><a href="FAQ.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="contato.html"><i class="fas fa-hands-helping"></i> Suporte</a></li>
+                        <li><a href="pp.html"><i class="fas fa-shield-alt"></i> Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="contact-info">
+                          <li><i class="fas fa-envelope"></i> contato@eduunica.com</li>
+                         <li><i class="fas fa-envelope"></i> erica.santos.lima15@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> (84) 98192-1744</li>
+                        <li><i class="fas fa-map-marker-alt"></i> UNIFAEL</li>
+                        <li><i class="fas fa-globe"></i> Erica Lima dos Santos - RA: 47518433</li>
+                    
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Eduúnica. Todos os direitos reservados. Porque cada mente merece uma educação sob medida.</p>
+            </div>
+        </div>
+    </footer>
+<!-- Botão Voltar ao Topo -->
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo da página">
+    <i class="fas fa-chevron-up"></i>
+</button>
+    <script>
+        // Botão Voltar ao Topo
+function initBackToTop() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    if (!backToTopButton) return;
+    
+    // Mostrar/ocultar botão baseado no scroll
+    function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    }
+    
+    // Função para voltar ao topo suavemente
+    function scrollToTop() {
+        // Verifica se o usuário prefere reduzir movimento
+        const prefersReducedMotion = document.body.classList.contains('reduce-motion');
+        
+        if (prefersReducedMotion) {
+            // Scroll instantâneo para quem prefere reduzir animação
+            window.scrollTo({
+                top: 0,
+                behavior: 'auto'
+            });
+        } else {
+            // Scroll suave para outros usuários
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Anuncia para leitores de tela
+        announceToScreenReader('Voltou ao topo da página');
+    }
+    
+    // Event Listeners
+    window.addEventListener('scroll', toggleBackToTop);
+    backToTopButton.addEventListener('click', scrollToTop);
+    
+    // Teclado - permitir ativação com Enter ou Espaço
+    backToTopButton.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToTop();
+        }
+    });
+    
+    // Verificar estado inicial
+    toggleBackToTop();
+}
+
+// Inicializar quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    initBackToTop();
+});
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const confirmationModal = document.getElementById('confirmationModal');
+            const goHomeBtn = document.getElementById('goHome');
+            const goFaqBtn = document.getElementById('goFaq');
+
+            // Envio do formulário
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Aqui você normalmente enviaria os dados para um servidor
+                // Por enquanto, apenas simularemos o envio
+                
+                // Exibir modal de confirmação
+                confirmationModal.style.display = 'flex';
+            });
+
+            // Botão para voltar à página inicial
+            goHomeBtn.addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+
+            // Botão para voltar ao FAQ
+            goFaqBtn.addEventListener('click', function() {
+                window.location.href = 'faq.html';
+            });
+
+            // Fechar modal ao clicar fora dele
+            confirmationModal.addEventListener('click', function(e) {
+                if (e.target === confirmationModal) {
+                    confirmationModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

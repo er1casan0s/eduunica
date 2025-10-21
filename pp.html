@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - Site Educativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== VARIÁVEIS PARA ALTO CONTRASTE ===== */
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --text-color: #333333;
+            --background-color: #ffffff;
+            --contrast-ratio: 4.5; /* WCAG AA */
+        }
+
+        /* ===== ESTILOS GERAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== CABEÇALHO ===== */
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #e0e0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #ffffff;
+        }
+
+        .slogan {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-top: 5px;
+            color: #e0e0ff;
+        }
+
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        .privacy-section {
+            margin: 40px 0;
+        }
+
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .privacy-header h2 {
+            color: #6a11cb;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .privacy-header h2 i {
+            margin-right: 15px;
+        }
+
+        .privacy-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .privacy-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .privacy-section-content {
+            margin-bottom: 30px;
+        }
+
+        .privacy-section-content h3 {
+            color: #6a11cb;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .privacy-section-content h3 i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .privacy-section-content p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .privacy-section-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .privacy-section-content li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .highlight-box {
+            background: #f0f8ff;
+            border-left: 4px solid #6a11cb;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+        }
+
+        /* ===== RODAPÉ ===== */
+        footer {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        footer .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        footer .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        footer .footer-column h3::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background-color: white;
+            margin-top: 10px;
+        }
+
+        footer .footer-column p {
+            color: #e0e0ff;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        footer .footer-column ul {
+            list-style: none;
+        }
+
+        footer .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        footer .footer-column ul li a {
+            color: #e0e0ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        footer .footer-column ul li a i,
+        footer .contact-info li i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        footer .footer-column ul li a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        footer .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: #e0e0ff;
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .privacy-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .privacy-content {
+                padding: 25px;
+            }
+
+            .privacy-section-content h3 {
+                font-size: 1.3rem;
+            }
+
+            footer .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            footer .footer-column h3::after {
+                margin: 10px auto 0;
+            }
+        }
+        /* ===== BOTÃO VOLTAR AO TOPO ===== */
+        /* Botão Voltar ao Topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color, #4a90e2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--primary-dark, #357abd);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:focus {
+    outline: 3px solid var(--focus-color, #ffd700);
+    outline-offset: 2px;
+}
+
+/* Modo alto contraste */
+.high-contrast .back-to-top {
+    background: #000;
+    border: 2px solid #fff;
+}
+
+.high-contrast .back-to-top:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Reduzir movimento */
+.reduce-motion .back-to-top {
+    transition: none;
+}
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+      <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="logo"><i class="fas fa-brain"></i> EduÚnica</h1>
+                    <p class="slogan">Porque cada mente merece uma educação sob medida</p>
+                </div>
+            </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <section class="privacy-section">
+            <div class="privacy-header">
+                <h2><i class="fas fa-shield-alt"></i> Política de Privacidade</h2>
+                <p>Última atualização: 10 de Outubro de 2025</p>
+            </div>
+
+            <div class="privacy-content">
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-info-circle"></i> Introdução</h3>
+                    <p>Bem-vindo à nossa Política de Privacidade. Esta página informa sobre nossas políticas relativas à coleta, uso e divulgação de dados pessoais quando você usa nosso site e as opções que você tem associadas a esses dados.</p>
+                    <p>Utilizamos seus dados para fornecer e melhorar o serviço. Ao usar o site, você concorda com a coleta e uso de informações de acordo com esta política.</p>
+                </div>
+
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-database"></i> Coleta e Uso de Informações</h3>
+                    <p>Coletamos vários tipos diferentes de informações para vários fins, para fornecer e melhorar nosso serviço para você.</p>
+                    
+                    <h4>Tipos de Dados Coletados</h4>
+                    <ul>
+                        <li><strong>Dados Pessoais:</strong> Ao usar nosso site, podemos solicitar que você nos forneça certas informações de identificação pessoal que podem ser usadas para contatá-lo ou identificá-lo ("Dados Pessoais").</li>
+                        <li><strong>Dados de Uso:</strong> Podemos também coletar informações sobre como o site é acessado e usado ("Dados de Uso").</li>
+                        <li><strong>Dados de Jogos Educativos:</strong> Coletamos informações sobre o progresso, pontuações e desempenho nos jogos educativos para personalizar a experiência de aprendizado.</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-cookie"></i> Cookies e Tecnologias Similares</h3>
+                    <p>Utilizamos cookies e tecnologias de rastreamento similares para rastrear a atividade em nosso site e manter determinadas informações.</p>
+                    <p>Os cookies são arquivos com uma pequena quantidade de dados que podem incluir um identificador anônimo único. Os cookies são enviados para o seu navegador a partir de um site e armazenados no seu dispositivo.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Exemplos de Cookies que usamos:</strong></p>
+                        <ul>
+                            <li><strong>Cookies de Sessão:</strong> Usamos esses cookies para operar nosso site.</li>
+                            <li><strong>Cookies de Preferências:</strong> Usamos esses cookies para lembrar suas preferências e várias configurações.</li>
+                            <li><strong>Cookies de Segurança:</strong> Usamos esses cookies para fins de segurança.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-user-shield"></i> Uso de Dados</h3>
+                    <p>O EduÚnica usa os dados coletados para várias finalidades:</p>
+                    <ul>
+                        <li>Fornecer e manter nosso serviço</li>
+                        <li>Notificá-lo sobre alterações em nosso serviço</li>
+                        <li>Permitir que você participe de recursos interativos do nosso site quando optar por fazê-lo</li>
+                        <li>Fornecer suporte ao cliente</li>
+                        <li>Fornecer análises ou informações valiosas para que possamos melhorar o site</li>
+                        <li>Monitorar o uso do site</li>
+                        <li>Detectar, prevenir e resolver problemas técnicos</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-share-alt"></i> Transferência de Dados</h3>
+                    <p>Suas informações, incluindo Dados Pessoais, podem ser transferidas para — e mantidas em — computadores localizados fora do seu estado, província, país ou outra jurisdição governamental onde as leis de proteção de dados podem ser diferentes das da sua jurisdição.</p>
+                    <p>Se você estiver localizado fora do Brasil e optar por nos fornecer informações, observe que transferimos os dados, incluindo Dados Pessoais, para o Brasil e os processamos lá.</p>
+                </div>
+
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-lock"></i> Segurança de Dados</h3>
+                    <p>A segurança dos seus dados é importante para nós, mas lembre-se de que nenhum método de transmissão pela Internet ou método de armazenamento eletrônico é 100% seguro. Embora nos esforcemos para usar meios comercialmente aceitáveis para proteger seus Dados Pessoais, não podemos garantir sua segurança absoluta.</p>
+                </div>
+
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-external-link-alt"></i> Links para Outros Sites</h3>
+                    <p>Nosso site pode conter links para outros sites que não são operados por nós. Se você clicar em um link de terceiros, será direcionado para o site desse terceiro. Recomendamos fortemente que você revise a Política de Privacidade de cada site que visitar.</p>
+                    <p>Não temos controle e não assumimos responsabilidade pelo conteúdo, políticas de privacidade ou práticas de quaisquer sites ou serviços de terceiros.</p>
+                </div>
+
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-child"></i> Privacidade das Crianças</h3>
+                    <p>Nosso site não aborda menores de 13 anos. Não coletamos intencionalmente informações de identificação pessoal de menores de 13 anos. Se você é pai/mãe ou responsável e sabe que seu filho nos forneceu Dados Pessoais, entre em contato conosco.</p>
+                    <p>Se tomarmos conhecimento de que coletamos Dados Pessoais de menores de 13 anos sem verificação do consentimento dos pais, tomaremos medidas para remover essas informações de nossos servidores.</p>
+                </div>
+
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-sync-alt"></i> Alterações a Esta Política de Privacidade</h3>
+                    <p>Podemos atualizar nossa Política de Privacidade de tempos em tempos. Notificaremos você sobre quaisquer alterações, publicando a nova Política de Privacidade nesta página.</p>
+                    <p>Informaremos você por e-mail e/ou um aviso em destaque em nosso site, antes que a alteração entre em vigor e atualizaremos a "data de última atualização" na parte superior desta Política de Privacidade.</p>
+                    <p>Recomendamos que você revise esta Política de Privacidade periodicamente para quaisquer alterações. As alterações a esta Política de Privacidade são efetivas quando são publicadas nesta página.</p>
+                </div>
+
+                <div class="privacy-section-content">
+                    <h3><i class="fas fa-envelope"></i> Contato</h3>
+                    <p>Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco:</p>
+                    <ul>
+                        <li>Por e-mail: privacidade@eduunica.com</li>
+                        <li>Visitando esta página em nosso site: www.eduunica.com/contato</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre Nós</h3>
+                    <p>Projeto de TCC que visa promover inclusão através de jogos educativos para pessoas neurodivergentes de todas as idades, com diário de bordo para acompanhamento personalizado.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Página Inicial</a></li>
+                        <li><a href="FAQ.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="home.html"><i class="fas fa-hands-helping"></i> Suporte</a></li>
+                        <li><a href="pp.html"><i class="fas fa-shield-alt"></i> Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> contato@eduunica.com</li>
+                         <li><i class="fas fa-envelope"></i> erica.santos.lima15@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> (84) 98192-1744</li>
+                        <li><i class="fas fa-map-marker-alt"></i> UNIFAEL</li>
+                        <li><i class="fas fa-globe"></i> Erica Lima dos Santos - RA: 47518433</li>
+                    
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 EduUnica. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Botão Voltar ao Topo -->
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo da página">
+    <i class="fas fa-chevron-up"></i>
+</button>
+<script>
+    // Botão Voltar ao Topo
+function initBackToTop() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    if (!backToTopButton) return;
+    
+    // Mostrar/ocultar botão baseado no scroll
+    function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    }
+    
+    // Função para voltar ao topo suavemente
+    function scrollToTop() {
+        // Verifica se o usuário prefere reduzir movimento
+        const prefersReducedMotion = document.body.classList.contains('reduce-motion');
+        
+        if (prefersReducedMotion) {
+            // Scroll instantâneo para quem prefere reduzir animação
+            window.scrollTo({
+                top: 0,
+                behavior: 'auto'
+            });
+        } else {
+            // Scroll suave para outros usuários
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Anuncia para leitores de tela
+        announceToScreenReader('Voltou ao topo da página');
+    }
+    
+    // Event Listeners
+    window.addEventListener('scroll', toggleBackToTop);
+    backToTopButton.addEventListener('click', scrollToTop);
+    
+    // Teclado - permitir ativação com Enter ou Espaço
+    backToTopButton.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToTop();
+        }
+    });
+    
+    // Verificar estado inicial
+    toggleBackToTop();
+}
+
+// Inicializar quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    initBackToTop();
+});
+</script>
+</body>
+</html>

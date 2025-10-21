@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - EduÚnica</title>
+    <link rel="icon" type="image/png" href="imagens/quebra-cabeca.png">
+    <!-- Meta tags de acessibilidade -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduÚnica - Plataforma educacional inclusiva para pessoas neurodivergentes com jogos adaptados e diário de bordo">
+    <meta name="keywords" content="educação inclusiva, neurodiversidade, autismo, TDAH, jogos educativos, acessibilidade">
+
+    <!-- Links para recursos de acessibilidade -->
+    <link rel="preload" href="style.css" as="style">
+    <script src="accessibility.js"></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
+
+    <!-- Esquema de cores para modo alto contraste -->
+    <meta name="color-scheme" content="light dark">
+
+            <script>
+            // Carrega imediatamente para estar disponível o mais rápido possível
+            document.documentElement.setAttribute('data-user-agent', navigator.userAgent);
+        </script>
+    <!-- LINHA ADICIONADA - Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="comecaragora.css">
+    <style>
+        /* Botão Voltar ao Topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color, #4a90e2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--primary-dark, #357abd);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:focus {
+    outline: 3px solid var(--focus-color, #ffd700);
+    outline-offset: 2px;
+}
+
+/* Modo alto contraste */
+.high-contrast .back-to-top {
+    background: #000;
+    border: 2px solid #fff;
+}
+
+.high-contrast .back-to-top:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Reduzir movimento */
+.reduce-motion .back-to-top {
+    transition: none;
+}
+    </style>
+</head>
+<body>
+    <!-- Controles de Acessibilidade Flutuantes -->
+<div class="accessibility-controls">
+    <button class="accessibility-toggle" 
+            aria-label="Abrir configurações de acessibilidade"
+            onclick="toggleAccessibilityPanel()">
+
+        <i class="fas fa-universal-access"></i>
+    </button>
+    
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <h3 class="sr-only">Configurações de Acessibilidade</h3>
+        
+        <div class="accessibility-option">
+            <input aria-required="true" aria-describedby="help-text" type="checkbox" id="highContrast" onchange="toggleHighContrast()">
+            <small id="help-text" class="sr-only">Texto de ajuda</small>
+            <label for="highContrast">Alto Contraste</label>
+        </div>
+        
+        <div class="accessibility-option">
+            <input aria-required="true" aria-describedby="help-text" type="checkbox" id="largeText" onchange="toggleLargeText()">
+           <small id="help-text" class="sr-only">Texto de ajuda</small>
+            <label for="largeText">Texto Maior</label>
+        </div>
+        
+        <div class="accessibility-option">
+            <input aria-required="true" aria-describedby="help-text" type="checkbox" id="reduceMotion" onchange="toggleReduceMotion()">
+            <small id="help-text" class="sr-only">Texto de ajuda</small>
+            <label for="reduceMotion">Reduzir Animação</label>
+        </div>
+        
+        <div class="accessibility-option">
+            <input aria-required="true" aria-describedby="help-text" type="checkbox" id="colorblindMode" onchange="toggleColorblindMode()">
+            <small id="help-text" class="sr-only">Texto de ajuda</small>
+            <label for="colorblindMode">Modo Daltonismo</label>
+        </div>
+        
+        <button onclick="resetAccessibility()" style="margin-top: 10px; width: 100%;">
+            <i class="fas fa-redo"></i> Redefinir
+        </button>
+    </div>
+</div>
+
+<!-- Link para pular para conteúdo principal (primeiro elemento do body) -->
+<a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+
+<!-- SVG para filtros de daltonismo (adicione no final do body) -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
+    <defs>
+        <filter id="protanopia">
+            <feColorMatrix type="matrix"
+                values="0.567, 0.433, 0,     0, 0
+                        0.558, 0.442, 0,     0, 0
+                        0,     0.242, 0.758, 0, 0
+                        0,     0,     0,     1, 0" />
+        </filter>
+    </defs>
+</svg>
+<!-- Botão Voltar ao Topo -->
+<button id="backToTop" class="back-to-top" aria-label="Voltar ao topo da página">
+    <i class="fas fa-chevron-up"></i>
+</button>
+<!-- Script de Acessibilidade -->
+<script>
+    // Botão Voltar ao Topo
+function initBackToTop() {
+    const backToTopButton = document.getElementById('backToTop');
+    
+    if (!backToTopButton) return;
+    
+    // Mostrar/ocultar botão baseado no scroll
+    function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+    }
+    
+    // Função para voltar ao topo suavemente
+    function scrollToTop() {
+        // Verifica se o usuário prefere reduzir movimento
+        const prefersReducedMotion = document.body.classList.contains('reduce-motion');
+        
+        if (prefersReducedMotion) {
+            // Scroll instantâneo para quem prefere reduzir animação
+            window.scrollTo({
+                top: 0,
+                behavior: 'auto'
+            });
+        } else {
+            // Scroll suave para outros usuários
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Anuncia para leitores de tela
+        announceToScreenReader('Voltou ao topo da página');
+    }
+    
+    // Event Listeners
+    window.addEventListener('scroll', toggleBackToTop);
+    backToTopButton.addEventListener('click', scrollToTop);
+    
+    // Teclado - permitir ativação com Enter ou Espaço
+    backToTopButton.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            scrollToTop();
+        }
+    });
+    
+    // Verificar estado inicial
+    toggleBackToTop();
+}
+
+// Inicializar quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    initBackToTop();
+});
+    // Detecta se usuário está navegando com teclado
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            document.body.classList.add('user-is-tabbing');
+        }
+    });
+    
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('user-is-tabbing');
+    });
+
+    // Funções dos controles de acessibilidade
+    function toggleAccessibilityPanel() {
+        const panel = document.getElementById('accessibilityPanel');
+        panel.classList.toggle('show');
+    }
+
+    function toggleHighContrast() {
+        document.body.classList.toggle('high-contrast');
+        // Salva preferência
+        localStorage.setItem('highContrast', document.body.classList.contains('high-contrast'));
+    }
+
+    function toggleLargeText() {
+        document.body.classList.toggle('large-text');
+        localStorage.setItem('largeText', document.body.classList.contains('large-text'));
+    }
+
+    function toggleReduceMotion() {
+        document.body.classList.toggle('reduce-motion');
+        localStorage.setItem('reduceMotion', document.body.classList.contains('reduce-motion'));
+    }
+
+    function toggleColorblindMode() {
+        document.body.classList.toggle('colorblind-friendly');
+        localStorage.setItem('colorblindMode', document.body.classList.contains('colorblind-friendly'));
+    }
+
+    function resetAccessibility() {
+        document.body.classList.remove('high-contrast', 'large-text', 'reduce-motion', 'colorblind-friendly');
+        localStorage.removeItem('highContrast');
+        localStorage.removeItem('largeText');
+        localStorage.removeItem('reduceMotion');
+        localStorage.removeItem('colorblindMode');
+        
+        // Desmarca checkboxes
+        document.getElementById('highContrast').checked = false;
+        document.getElementById('largeText').checked = false;
+        document.getElementById('reduceMotion').checked = false;
+        document.getElementById('colorblindMode').checked = false;
+    }
+
+    // Carrega preferências salvas ao iniciar
+    window.addEventListener('load', function() {
+        if (localStorage.getItem('highContrast') === 'true') {
+            document.body.classList.add('high-contrast');
+            document.getElementById('highContrast').checked = true;
+        }
+        if (localStorage.getItem('largeText') === 'true') {
+            document.body.classList.add('large-text');
+            document.getElementById('largeText').checked = true;
+        }
+        if (localStorage.getItem('reduceMotion') === 'true') {
+            document.body.classList.add('reduce-motion');
+            document.getElementById('reduceMotion').checked = true;
+        }
+        if (localStorage.getItem('colorblindMode') === 'true') {
+            document.body.classList.add('colorblind-friendly');
+            document.getElementById('colorblindMode').checked = true;
+        }
+    });
+
+    // Anuncia mudanças para leitores de tela
+    function announceToScreenReader(message) {
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('aria-atomic', 'true');
+        announcement.classList.add('sr-only');
+        announcement.textContent = message;
+        document.body.appendChild(announcement);
+        
+        setTimeout(() => {
+            document.body.removeChild(announcement);
+        }, 1000);
+    }
+</script>
+    <!-- Cabeçalho simplificado -->
+    <header role="banner" aria-label="Cabeçalho principal" class="simple-header">
+  <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="logo"><i class="fas fa-brain"></i> EduÚnica</h1>
+                    <p class="slogan">Porque cada mente merece uma educação sob medida</p>
+                </div>
+            </div>
+</header>
+
+    <main class="container" id="main-content" role="main" aria-label="Conteúdo principal">
+        <section class="registration-section">
+            <div class="registration-container">
+                <h2 class="section-title"><i class="fas fa-user-plus"></i> Cadastro</h2>
+                <p class="form-description">Crie sua conta para acessar jogos personalizados e acompanhar seu progresso no diário de bordo.</p>
+                
+                <form class="registration-form" id="registrationForm">
+                    <!-- Informações Pessoais -->
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input aria-required="true" aria-describedby="help-text" type="text" id="name" name="name" 
+                                   pattern="[A-Za-zÀ-ÿ\s]{2,}\s+[A-Za-zÀ-ÿ\s]{2,}" 
+                                   title="Digite pelo menos nome e sobrenome" 
+                                   required>
+                                   <small id="help-text" class="sr-only">Texto de ajuda</small>
+                        </div>
+
+                        <small class="validation-message">Digite pelo menos nome e sobrenome</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="birthdate">Data de Nascimento</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input aria-required="true" aria-describedby="help-text" type="date" id="birthdate" name="birthdate" required>
+                        <small id="help-text" class="sr-only">Texto de ajuda</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input aria-required="true" aria-describedby="help-text" type="email" id="email" name="email" required>
+                        <small id="help-text" class="sr-only">Texto de ajuda</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone"></i>
+                        <input aria-required="true" aria-describedby="help-text" type="tel" id="phone" name="phone" 
+                            placeholder="(00) 00000-0000"
+                            maxlength="15"
+                            oninput="this.value = this.value.replace(/\D/g, '').slice(0, 11)"
+                            required>
+                            <small id="help-text" class="sr-only">Texto de ajuda</small>
+                                </div>
+                        <small class="validation-message">Formato: (00) 00000-0000</small>
+                    </div>
+                    
+                    <!-- Informações de Acesso -->
+                    <div class="form-group">
+                        <label for="username">Nome de Usuário</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user-tag"></i>
+                            <input aria-required="true" aria-describedby="help-text" type="text" id="username" name="username" required>
+                        <small id="help-text" class="sr-only">Texto de ajuda</small>
+                        </div>
+                    </div>
+                    
+                 <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input aria-required="true" aria-describedby="help-text" type="password" id="password" name="password" 
+                            minlength="6"
+                            title="A senha deve ter pelo menos 6 caracteres"
+                            required>
+                        <small id="help-text" class="sr-only">Texto de ajuda</small>
+                    </div>
+                    <small class="validation-message">A senha é livre</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirmar Senha</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input aria-required="true" aria-describedby="help-text" type="password" id="confirm-password" name="confirm-password" 
+                            minlength="6"
+                            title="A senha deve ter pelo menos 6 caracteres"
+                            required>
+                        <small id="help-text" class="sr-only">Texto de ajuda</small>
+                    </div>
+                </div>
+                    
+                    <!-- Resto do formulário permanece igual -->
+                    <div class="form-group">
+                        <label for="user-type">Tipo de Usuário</label>
+                        <select id="user-type" name="user-type" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="student">Estudante</option>
+                            <option value="parent">Responsável</option>
+                            <option value="educator">Educador</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Informações de Neurodiversidade -->
+                    <div class="form-group full-width">
+                        <label>Perfil de Neurodiversidade (opcional)</label>
+                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Estas informações nos ajudarão a personalizar sua experiência de aprendizado.</p>
+                        
+                        <div class="neurodiversity-options">
+                            <div class="checkbox-group">
+                                <input aria-required="true" aria-describedby="help-text" type="checkbox" id="autism" name="neurodiversity[]" value="autism">
+                                <small id="help-text" class="sr-only">Texto de ajuda</small>
+                                <label for="autism">Autismo</label>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <input aria-required="true" aria-describedby="help-text" type="checkbox" id="adhd" name="neurodiversity[]" value="adhd">
+                                <small id="help-text" class="sr-only">Texto de ajuda</small>
+                                <label for="adhd">TDAH</label>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <input aria-required="true" aria-describedby="help-text" type="checkbox" id="dyslexia" name="neurodiversity[]" value="dyslexia">
+                                <small id="help-text" class="sr-only">Texto de ajuda</small>
+                                <label for="dyslexia">Dislexia</label>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <input aria-required="true" aria-describedby="help-text"type="checkbox" id="dyscalculia" name="neurodiversity[]" value="dyscalculia">
+                               <small id="help-text" class="sr-only">Texto de ajuda</small>
+                                <label for="dyscalculia">Discalculia</label>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <input aria-required="true" aria-describedby="help-text" type="checkbox" id="dysgraphia" name="neurodiversity[]" value="dysgraphia">
+                                <small id="help-text" class="sr-only">Texto de ajuda</small>
+                                <label for="dysgraphia">Disgrafia</label>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <input aria-required="true" aria-describedby="help-text" type="checkbox" id="other" name="neurodiversity[]" value="other">
+                                <small id="help-text" class="sr-only">Texto de ajuda</small>
+                                <label for="other">Outro</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="preferences">Preferências e Necessidades Específicas</label>
+                        <textarea id="preferences" name="preferences" placeholder="Conte-nos sobre suas preferências de aprendizado, sensibilidades sensoriais ou outras informações que possam nos ajudar a personalizar sua experiência."></textarea>
+                    </div>
+                    
+                    <!-- Termos e Condições -->
+                    <div class="form-group full-width">
+                        <div class="checkbox-group">
+                            <input aria-required="true" aria-describedby="help-text" type="checkbox" id="terms" name="terms" required>
+                      <small id="help-text" class="sr-only">Texto de ajuda</small>
+                            <label for="terms">Li e concordo com os <a href="pp.html">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.</label>
+                      
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input aria-required="true" aria-describedby="help-text" type="checkbox" id="newsletter" name="newsletter">
+                           <small id="help-text" class="sr-only">Texto de ajuda</small>
+                            <label for="newsletter">Desejo receber novidades e atualizações por e-mail.</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Botão de Envio -->
+                    <div class="form-group full-width">
+                        <button type="submit" class="submit-button"><i class="fas fa-user-plus"></i> Criar Conta</button>
+                    </div>
+                </form>
+                
+                <div class="form-footer">
+                    <p>Já tem uma conta? <a href="login.html">Faça login aqui</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé do site com informações de contato e links úteis -->
+    <footer  role="contentinfo" aria-label="Rodapé">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Coluna 1: Sobre o projeto -->
+                <div class="footer-column">
+                    <h3>Sobre o EduÚnica</h3>
+                    <p>Projeto de TCC que visa promover inclusão através de jogos educativos para pessoas neurodivergentes de todas as idades, com diário de bordo para acompanhamento personalizado.</p>
+                    <div class="social-icons">
+                        <a href="home.html" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="home.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="home.html" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/erica-santos-851b75191/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Coluna 2: Links rápidos -->
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                      
+                        <li><a href="FAQ.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="contato.html"><i class="fas fa-hands-helping"></i> Suporte</a></li>
+                        <li><a href="pp.html"><i class="fas fa-shield-alt"></i> Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Coluna 3: Contato -->
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> erica.santos.lima15@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> (84) 98192-1744</li>
+                        <li><i class="fas fa-map-marker-alt"></i> UNIFAEL</li>
+                        <li><i class="fas fa-globe"></i> Erica Lima dos Santos - RA: 47518433</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Direitos autorais -->
+            <div class="copyright">
+                <p>&copy; 2025 EduÚnica - Todos os direitos reservados | Projeto de TCC</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para carregar os ícones do Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="comecaragora.js"></script>
+
+                 <!-- Link para pular para conteúdo principal (deve ser o PRIMEIRO elemento) -->
+            <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+
+            <!-- SVG para filtros de daltonismo -->
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none;">
+                <defs>
+                    <filter id="protanopia">
+                        <feColorMatrix type="matrix"
+                            values="0.567, 0.433, 0,     0, 0
+                                    0.558, 0.442, 0,     0, 0
+                                    0,     0.242, 0.758, 0, 0
+                                    0,     0,     0,     1, 0" />
+                    </filter>
+                </defs>
+            </svg>
+
+            <!-- Script do sistema de acessibilidade -->
+            <script src="js/accessibility.js"></script>
+
+            <!-- Script de inicialização rápida -->
+            <script>
+            // Aplica configurações imediatamente para evitar FOUC (Flash of Unstyled Content)
+            (function() {
+                const savedSettings = localStorage.getItem('eduunica_accessibility');
+                if (savedSettings) {
+                    const settings = JSON.parse(savedSettings);
+                    if (settings.highContrast) document.body.classList.add('high-contrast');
+                    if (settings.largeText) document.body.classList.add('large-text');
+                    if (settings.reduceMotion) document.body.classList.add('reduce-motion');
+                    if (settings.colorblindMode) document.body.classList.add('colorblind-friendly');
+                }
+            })();
+            </script>
+
+            <script>
+    // Carregar Font Awesome dinamicamente se não carregou
+    if (!document.querySelector('.fa-brain')) {
+        console.log('Font Awesome não carregou, carregando dinamicamente...');
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+        document.head.appendChild(link);
+    }
+</script>
+
+</body>
+</html>
